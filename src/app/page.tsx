@@ -434,9 +434,7 @@ export default function Page() {
     load();
   }, []);
 
-  // Affiche l'écran d'erreur si .env.local pas configuré
-  if (!envOk) return <EnvError />;
-
+  // ⚠️ Tous les hooks AVANT tout return conditionnel (Règle des Hooks React)
   const subjects = [
     'Tous',
     ...Array.from(new Set(resources.map((r) => r.subject).filter(Boolean) as string[])),
@@ -468,6 +466,9 @@ export default function Page() {
     setLevel('Tous niveaux');
     setTab('ALL');
   }, []);
+
+  // Return conditionnel APRES tous les hooks
+  if (!envOk) return <EnvError />;
 
   return (
     <>
